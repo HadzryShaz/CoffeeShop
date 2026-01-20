@@ -62,4 +62,9 @@ public class OrderBean implements Serializable {
     public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
     }
+    
+    private String orderCustomization;
+
+public String getOrderCustomization() { return orderCustomization; }
+public void setOrderCustomization(String orderCustomization) { this.orderCustomization = orderCustomization; }
 }

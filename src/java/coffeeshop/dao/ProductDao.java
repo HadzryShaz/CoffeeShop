@@ -49,7 +49,7 @@ public class ProductDao {
         }
         return "FAIL";
     }
-    
+
     // Method to get a single product details
     public ProductBean getProductById(int id) {
         ProductBean p = new ProductBean();
@@ -86,18 +86,37 @@ public class ProductDao {
             e.printStackTrace();
         }
     }
+
     //Method to delete the product 
     public void deleteProduct(int id) {
-    String sql = "DELETE FROM PRODUCTS WHERE PROD_ID = ?";
-    
-    try (Connection con = DBConnection.createConnection();
-         PreparedStatement ps = con.prepareStatement(sql)) {
-        
-        ps.setInt(1, id);
-        ps.executeUpdate();
-        
-    } catch (SQLException e) {
-        e.printStackTrace();
+        String sql = "DELETE FROM PRODUCTS WHERE PROD_ID = ?";
+
+        try (Connection con = DBConnection.createConnection();
+                PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, id);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
-}
+
+    public int getProductCount() {
+        int count = 0;
+        // Uses the PRODUCTS table from your schema
+        String sql = "SELECT COUNT(*) FROM PRODUCTS";
+
+        try (Connection con = DBConnection.createConnection();
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
 }

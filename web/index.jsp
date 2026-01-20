@@ -31,40 +31,26 @@ and open the template in the editor.
 
     <body class="bg-light">
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="index.html">CoffeeShop</a>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-3"> 
-                        <li class="nav-item">
-                            <a class="nav-link" href="login.jsp">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="MenuServlet">Menu</a> 
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="cart.jsp">Cart</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center" href="find_us.html">
-                                Find our store&nbsp;&nbsp;
-                                <img src="img/location.png" alt="location" 
-                                     style="width:18px; height:18px; margin-right:6px;">
-                            </a>
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-        </nav>
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="index.jsp">CoffeeShop</a>
+        <div class="navbar-nav ms-auto">
+            <a class="nav-link" href="MenuServlet">Menu</a>
+            
+            <%-- Check if user is logged in --%>
+            <% if (session.getAttribute("user") != null) { %>
+                <a class="nav-link" href="cart.jsp">Cart</a>
+                <a class="btn btn-outline-warning ms-lg-2" href="order_progress.jsp">
+                    <i class="bi bi-clock-history"></i> Track Order
+                </a>
+                <a class="nav-link" href="LogoutServlet">Logout</a>
+            <% } else { %>
+                <a class="nav-link" href="login.jsp">Login</a>
+                <a class="nav-link" href="register.jsp">Register</a>
+            <% } %>
+        </div>
+    </div>
+</nav>
 
 
         <div class="container-fluid bg-white text-center p-5 shadow-sm">

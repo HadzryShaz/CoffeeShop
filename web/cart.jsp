@@ -1,4 +1,4 @@
-
+        <%@page import="java.util.List, coffeeshop.model.CartItemBean"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -7,34 +7,45 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
+
         <div class="container mt-5">
-            <h2 class="text-center mb-4">Your Cart</h2>
-            <table class="table table-bordered">
+            <h2>Your Coffee Cart</h2>
+            <table class="table">
                 <thead>
                     <tr>
-                        <th>Item</th>
+                        <th>Product</th>
                         <th>Customization</th>
                         <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Subtotal</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Example Cart Row -->
+                    <%
+                        List<CartItemBean> cart = (List<CartItemBean>) session.getAttribute("cart");
+                        double total = 0;
+                        if (cart != null) {
+                            for (CartItemBean item : cart) {
+                                total += item.getProduct().getProdPrice();
+                    %>
                     <tr>
-                        <td>Latte</td>
-                        <td>Medium, Extra Shot</td>
-                        <td>$7.50</td>
-                        <td>1</td>
-                        <td>$7.50</td>
-                        <td><button class="btn btn-danger btn-sm">Remove</button></td>
+                        <td><%= item.getProduct().getProdName()%></td>
+                        <td><small><%= item.getCustomization()%></small></td>
+                        <td>RM <%= String.format("%.2f", item.getProduct().getProdPrice())%></td>
+                        <td><a href="RemoveFromCart?id=..." class="btn btn-sm btn-danger">Remove</a></td>
                     </tr>
+                    <%      }
+                }%>
                 </tbody>
             </table>
-            <div class="text-end">
-                <a href="checkout.html" class="btn btn-primary">Proceed to Checkout</a>
-            </div>
+            <h3>Total: RM <%= String.format("%.2f", total)%></h3>
+
+            <form action="CheckoutServlet" method="POST">
+                <select name="orderType" class="form-select mb-3" required>
+                    <option value="Dine In">Dine In</option>
+                    <option value="Take Away">Take Away</option>
+                </select>
+                <button type="submit" class="btn btn-success">Confirm Order</button>
+            </form>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </body>

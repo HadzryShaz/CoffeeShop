@@ -5,22 +5,19 @@
  */
 package coffeeshop.controller;
 
-import coffeeshop.dao.OrderDao;
-import coffeeshop.dao.ProductDao;
-import coffeeshop.model.ProductBean;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ajiji
  */
-public class DashboardServlet extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +36,10 @@ public class DashboardServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DashboardServlet</title>");
+            out.println("<title>Servlet LogoutServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DashboardServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LogoutServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,31 +54,20 @@ public class DashboardServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
+@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-// Inside your DashboardServlet's doGet method
-        OrderDao orderDao = new OrderDao();
-        ProductDao productDao = new ProductDao();
-
-// 1. Fetch real data from the database
-        int totalOrders = orderDao.getTotalOrderCount();
-        double totalRevenue = orderDao.getTotalRevenue();
-        int menuItems = productDao.getProductCount();
-        int activeQueue = orderDao.getPendingOrderCount();
-
-// 2. Set the attributes so the JSP can find them
-        request.setAttribute("totalOrders", totalOrders);
-        request.setAttribute("totalRevenue", totalRevenue);
-        request.setAttribute("menuItems", menuItems);
-        request.setAttribute("pendingOrders", activeQueue);
-
-// 3. Continue with your existing table lists
-        request.setAttribute("orders", orderDao.getAllOrders());
-        request.setAttribute("products", productDao.getAllProducts());
-
-        request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+        
+        // 1. Get the current session without creating a new one
+        HttpSession session = request.getSession(false);
+        
+        // 2. If a session exists, invalidate it to clear UserBean and Cart data
+        if (session != null) {
+            session.invalidate();
+        }
+        
+        // 3. Redirect back to the login page with a logged-out message
+        response.sendRedirect("login.jsp?msg=loggedout");
     }
 
     /**

@@ -23,15 +23,20 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="index.jsp">CoffeeShop</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-3"> 
-                        <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="MenuServlet">Menu</a></li>
-                        <li class="nav-item"><a class="nav-link" href="cart.jsp">Cart</a></li>
-                    </ul>
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link" href="MenuServlet">Menu</a>
+
+                    <%-- Check if user is logged in --%>
+                    <% if (session.getAttribute("user") != null) { %>
+                    <a class="nav-link" href="cart.jsp">Cart</a>
+                    <a class="btn btn-outline-warning ms-lg-2" href="order_progress.jsp">
+                        <i class="bi bi-clock-history"></i> Track Order
+                    </a>
+                    <a class="nav-link" href="LogoutServlet">Logout</a>
+                    <% } else { %>
+                    <a class="nav-link" href="login.jsp">Login</a>
+                    <a class="nav-link" href="register.jsp">Register</a>
+                    <% } %>
                 </div>
             </div>
         </nav>
@@ -43,35 +48,54 @@
 
         <div class="container mt-5">
             <div class="row g-4 justify-content-center">
-                <% 
+                <%
                     // 1. Get the list of products passed by MenuServlet [cite: 200]
                     List<ProductBean> products = (List<ProductBean>) request.getAttribute("products");
-                    
+
                     if (products != null && !products.isEmpty()) {
                         for (ProductBean p : products) {
                 %>
                 <div class="col-md-4">
                     <div class="card h-100 shadow-sm">
-                        <img src="<%= p.getProdImagePath() %>" class="card-img-top" alt="<%= p.getProdName() %>">
+                        <img src="<%= p.getProdImagePath()%>" class="card-img-top" alt="<%= p.getProdName()%>">
                         <div class="card-body text-center">
-                            <h5 class="card-title"><%= p.getProdName() %></h5>
-                            <p class="card-text text-muted small"><%= p.getProdDescription() %></p>
-                            <h6 class="text-primary mb-3">RM <%= String.format("%.2f", p.getProdPrice()) %></h6>
+                            <h5 class="card-title"><%= p.getProdName()%></h5>
+                            <p class="card-text text-muted small"><%= p.getProdDescription()%></p>
+                            <h6 class="text-primary mb-3">RM <%= String.format("%.2f", p.getProdPrice())%></h6>
                             <form action="AddToCartServlet" method="POST">
-                                <input type="hidden" name="productId" value="<%= p.getProdId() %>">
-                                <button type="submit" class="btn btn-outline-primary">Add to Cart</button>
+                                <input type="hidden" name="prodId" value="<%= p.getProdId()%>">
+
+                                <div class="mb-2">
+                                    <label class="small fw-bold">Sugar Level:</label>
+                                    <select name="sugarLevel" class="form-select form-select-sm">
+                                        <option value="Normal Sugar">Normal Sugar</option>
+                                        <option value="Less Sugar">Less Sugar</option>
+                                        <option value="No Sugar">No Sugar</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-2">
+                                    <label class="small fw-bold">Milk Type:</label>
+                                    <select name="milkType" class="form-select form-select-sm">
+                                        <option value="Full Cream">Full Cream</option>
+                                        <option value="Oat Milk (+RM2)">Oat Milk</option>
+                                        <option value="Soy Milk">Soy Milk</option>
+                                    </select>
+                                </div>
+
+                                <button type="submit" class="btn btn-sm btn-primary w-100">Add to Cart</button>
                             </form>
                         </div>
                     </div>
                 </div>
-                <% 
-                        }
-                    } else { 
+                <%
+                    }
+                } else {
                 %>
                 <div class="col-12 text-center">
                     <div class="alert alert-warning">No products available at the moment.</div>
                 </div>
-                <% } %>
+                <% }%>
             </div>
         </div>
 
