@@ -3,13 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ajiji/Documents/NetBeansProjects/CoffeeShopv2/web/checkout.html</file>
-            <file>file:/C:/Users/ajiji/Documents/NetBeansProjects/CoffeeShopv2/web/edit_menu.html</file>
-            <file>file:/C:/Users/ajiji/Documents/NetBeansProjects/CoffeeShopv2/web/dashboard.html</file>
-            <file>file:/C:/Users/ajiji/Documents/NetBeansProjects/CoffeeShopv2/web/find_us.html</file>
-            <file>file:/C:/Users/ajiji/Documents/NetBeansProjects/CoffeeShopv2/web/add_menu.html</file>
-            <file>file:/C:/Users/ajiji/Documents/NetBeansProjects/CoffeeShopv2/web/cart.html</file>
-            <file>file:/C:/Users/ajiji/Documents/NetBeansProjects/CoffeeShopv2/web/forgot_password.html</file>
+            <file>file:/C:/Users/ajiji/Documents/NetBeansProjects/CoffeeShopv2/web/dashboard.jsp</file>
+            <file>file:/C:/Users/ajiji/Documents/NetBeansProjects/CoffeeShopv2/web/menu_list.jsp</file>
+            <file>file:/C:/Users/ajiji/Documents/NetBeansProjects/CoffeeShopv2/src/java/coffeeshop/model/CartItemBean.java</file>
+            <file>file:/C:/Users/ajiji/Documents/NetBeansProjects/CoffeeShopv2/src/java/coffeeshop/controller/AddToCartServlet.java</file>
+            <file>file:/C:/Users/ajiji/Documents/NetBeansProjects/CoffeeShopv2/src/java/coffeeshop/controller/DashboardServlet.java</file>
+            <file>file:/C:/Users/ajiji/Documents/NetBeansProjects/CoffeeShopv2/src/java/coffeeshop/dao/OrderDao.java</file>
+            <file>file:/C:/Users/ajiji/Documents/NetBeansProjects/CoffeeShopv2/src/java/coffeeshop/model/OrderBean.java</file>
+            <file>file:/C:/Users/ajiji/Documents/NetBeansProjects/CoffeeShopv2/src/java/coffeeshop/controller/DeleteOrderServlet.java</file>
+            <file>file:/C:/Users/ajiji/Documents/NetBeansProjects/CoffeeShopv2/src/java/coffeeshop/controller/AddProductServlet.java</file>
+            <file>file:/C:/Users/ajiji/Documents/NetBeansProjects/CoffeeShopv2/src/java/coffeeshop/controller/CheckoutServlet.java</file>
         </group>
     </open-files>
 </project-private>
