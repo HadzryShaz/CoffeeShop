@@ -92,11 +92,11 @@ public class AddToCartServlet extends HttpServlet {
         }
 
         // Add item to cart
-        CartItemBean item = new CartItemBean();
-        item.setProduct(product);
-        item.setQuantity(1);
-        item.setCustomization(sugar + ", " + milk);
-        cart.add(item);
+        String custom = request.getParameter("customization");
+        int qty = Integer.parseInt(request.getParameter("quantity"));
+
+// Create your bean
+        CartItemBean item = new CartItemBean(product, qty, custom);
 
         session.setAttribute("cart", cart);
         response.sendRedirect("MenuServlet"); // Go back to menu
