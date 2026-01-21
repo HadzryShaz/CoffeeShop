@@ -234,4 +234,28 @@ public class OrderDao {
         }
         return false;
     }
+
+    public List<OrderBean> getActiveUserOrders(int userId) {
+        List<OrderBean> list = new ArrayList<>();
+        // Select all orders for this user, not just one
+        String sql = "SELECT * FROM ORDERS WHERE USER_ID = ? ORDER BY ORDER_ID DESC";
+
+        try (Connection con = DBConnection.createConnection();
+                PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                OrderBean o = new OrderBean();
+                o.setOrderId(rs.getInt("ORDER_ID"));
+                o.setOrderType(rs.getString("ORDER_TYPE"));
+                o.setOrderStatus(rs.getString("ORDER_STATUS"));
+                o.setTotalPrice(rs.getDouble("TOTAL_PRICE"));
+                list.add(o);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

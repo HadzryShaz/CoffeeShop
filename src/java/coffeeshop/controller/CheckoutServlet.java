@@ -105,7 +105,7 @@ public class CheckoutServlet extends HttpServlet {
 
             if (success) {
                 session.removeAttribute("cart"); // Clear cart on success
-                response.sendRedirect("MenuServlet?msg=success");
+                response.sendRedirect("order_progress.jsp?msg=success");
             } else {
                 response.sendRedirect("cart.jsp?err=failed");
             }
