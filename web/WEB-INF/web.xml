@@ -48,6 +48,10 @@
         <servlet-name>DeleteOrderServlet</servlet-name>
         <servlet-class>coffeeshop.controller.DeleteOrderServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RemoveFromCartServlet</servlet-name>
+        <servlet-class>coffeeshop.controller.RemoveFromCartServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MenuServlet</servlet-name>
         <url-pattern>/MenuServlet</url-pattern>
@@ -95,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>DeleteOrderServlet</servlet-name>
         <url-pattern>/DeleteOrderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveFromCartServlet</servlet-name>
+        <url-pattern>/RemoveFromCartServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

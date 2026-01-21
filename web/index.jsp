@@ -148,14 +148,7 @@
         </div>
 
         <%-- Footer --%>
-        <footer class="bg-dark text-white text-center py-4 mt-5">
-            <div class="container">
-                <div class="mb-3">
-                    <img src="img/coffeeshopN.png" alt="Logo" style="height: 30px; opacity: 0.8;">
-                </div>
-                <p class="m-0 small opacity-75">&copy; 2026 CoffeeShop. All rights reserved.</p>
-            </div>
-        </footer>
+<%@include file="footer.jsp" %>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </body>
