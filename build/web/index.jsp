@@ -56,7 +56,7 @@ and open the template in the editor.
         <div class="container-fluid bg-white text-center p-5 shadow-sm">
             <h1 class="display-5 fw-bold">Welcome to CoffeeShop</h1>
             <p class="lead">Freshly brewed coffee and warm pastries daily</p>
-            <a href="menu_list.html" class="btn btn-primary btn-lg">Order Now</a>
+            <a href="menu_list.jsp" class="btn btn-primary btn-lg">Order Now</a>
         </div>
 
         <div class="container mt-5">
@@ -70,7 +70,7 @@ and open the template in the editor.
                         <div class="card-body text-center">
                             <h5 class="card-title">Latte</h5>
                             <p class="card-text">Rich, smooth, and creamy</p>
-                            <a href="menu_list.html" class="btn btn-outline-primary">Order</a>
+                            <a href="menu_list.jsp" class="btn btn-outline-primary">Order</a>
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@ and open the template in the editor.
                         <div class="card-body text-center">
                             <h5 class="card-title">Croissant</h5>
                             <p class="card-text">Fresh and buttery</p>
-                            <a href="menu_list.html" class="btn btn-outline-primary">Order</a>
+                            <a href="menu_list.jsp" class="btn btn-outline-primary">Order</a>
                         </div>
                     </div>
                 </div>
@@ -92,7 +92,7 @@ and open the template in the editor.
                         <div class="card-body text-center">
                             <h5 class="card-title">Americano</h5>
                             <p class="card-text">Bold traditional brew</p>
-                            <a href="menu_list.html" class="btn btn-outline-primary">Order</a>
+                            <a href="menu_list.jsp" class="btn btn-outline-primary">Order</a>
                         </div>
                     </div>
                 </div>
