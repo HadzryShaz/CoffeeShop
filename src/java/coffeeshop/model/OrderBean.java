@@ -13,6 +13,7 @@ public class OrderBean implements Serializable {
     // Default Constructor
     public OrderBean() {
     }
+
     //Normal Constructor
     public OrderBean(int orderId, int userId, double totalPrice, String orderType, String orderStatus) {
         this.orderId = orderId;
@@ -62,9 +63,14 @@ public class OrderBean implements Serializable {
     public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
     }
-    
+
     private String orderCustomization;
 
-public String getOrderCustomization() { return orderCustomization; }
-public void setOrderCustomization(String orderCustomization) { this.orderCustomization = orderCustomization; }
+    public String getOrderCustomization() {
+        return orderCustomization;
+    }
+
+    public void setOrderCustomization(String orderCustomization) {
+        this.orderCustomization = orderCustomization;
+    }
 }

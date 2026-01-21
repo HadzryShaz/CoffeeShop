@@ -44,6 +44,10 @@
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>coffeeshop.controller.LogoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteOrderServlet</servlet-name>
+        <servlet-class>coffeeshop.controller.DeleteOrderServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MenuServlet</servlet-name>
         <url-pattern>/MenuServlet</url-pattern>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/LogoutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteOrderServlet</servlet-name>
+        <url-pattern>/DeleteOrderServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

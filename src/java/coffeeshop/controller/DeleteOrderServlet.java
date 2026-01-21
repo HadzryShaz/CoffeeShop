@@ -5,24 +5,19 @@
  */
 package coffeeshop.controller;
 
-import coffeeshop.dao.ProductDao;
-import coffeeshop.model.CartItemBean;
-import coffeeshop.model.ProductBean;
+import coffeeshop.dao.OrderDao;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ajiji
  */
-public class AddToCartServlet extends HttpServlet {
+public class DeleteOrderServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +36,10 @@ public class AddToCartServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddToCartServlet</title>");
+            out.println("<title>Servlet DeleteOrderServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddToCartServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DeleteOrderServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,7 +57,15 @@ public class AddToCartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        int orderId = Integer.parseInt(request.getParameter("id"));
+        OrderDao dao = new OrderDao();
+
+        if (dao.deleteOrder(orderId)) {
+            response.sendRedirect("DashboardServlet?msg=deleted");
+        } else {
+            response.sendRedirect("DashboardServlet?err=delete_failed");
+        }
     }
 
     /**
@@ -76,43 +79,7 @@ public class AddToCartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        int id = Integer.parseInt(request.getParameter("prodId"));
-        String sugar = request.getParameter("sugarLevel");
-        String milk = request.getParameter("milkType");
-        String notes = request.getParameter("specialNotes"); 
-
-        ProductDao dao = new ProductDao();
-        ProductBean product = dao.getProductById(id);
-
-        // 1. Handle Price Surcharge for Oat Milk
-        double basePrice = product.getProdPrice();
-        if (milk != null && milk.contains("Oat Milk")) {
-            // You can update the price in the bean or handle it in a subtotal variable
-            product.setProdPrice(basePrice + 2.00);
-        }
-
-        // 2. Format the Customization String
-        String fullCustomization = sugar + " | " + milk;
-        if (notes != null && !notes.trim().isEmpty()) {
-            fullCustomization += " | Note: " + notes;
-        }
-
-        HttpSession session = request.getSession();
-        List<CartItemBean> cart = (List<CartItemBean>) session.getAttribute("cart");
-        if (cart == null) {
-            cart = new ArrayList<>();
-        }
-
-        // 3. Add item to cart
-        CartItemBean item = new CartItemBean();
-        item.setProduct(product);
-        item.setQuantity(1);
-        item.setCustomization(fullCustomization);
-        cart.add(item);
-
-        session.setAttribute("cart", cart);
-        response.sendRedirect("MenuServlet");
+        processRequest(request, response);
     }
 
     /**

@@ -154,11 +154,11 @@
                                     <td>#<%= o.getOrderId()%></td>
                                     <td><span class="badge bg-info text-dark"><%= o.getOrderType()%></span></td>
 
-                
+
                                     <td>
                                         <small>
-                                            <%= (o.getOrderCustomization() == null || o.getOrderCustomization().equalsIgnoreCase("null"))
-                ? "No specific instructions" : o.getOrderCustomization()%>
+                                            <%-- If the DAO finally finds data, it will show here instead of the fallback --%>
+                                            <%= (o.getOrderCustomization() == null || o.getOrderCustomization().equalsIgnoreCase("null")) ? "No specific instructions" : o.getOrderCustomization()%>
                                         </small>
                                     </td>
 
@@ -177,7 +177,13 @@
                                                 <option value="Ready to pickup" <%= o.getOrderStatus().equals("Ready to pickup") ? "selected" : ""%>>Ready to pickup</option>
                                             </select>
                                             <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                                            <a href="DeleteOrderServlet?id=<%= o.getOrderId()%>" 
+                                               class="btn btn-sm btn-outline-danger" 
+                                               onclick="return confirm('Delete this order permanently?')">
+                                                Delete
+                                            </a>
                                         </form>
+
                                     </td>
                                 </tr>
                                 <%      }

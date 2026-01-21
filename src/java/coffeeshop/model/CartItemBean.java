@@ -6,7 +6,10 @@ public class CartItemBean {
     private int quantity;
     private String customization;
 
+    // Updated constructor to prevent "null" in the UI
     public CartItemBean() {
+        this.customization = "Standard"; // Default value
+        this.quantity = 1;
     }
 
     public CartItemBean(ProductBean product, int quantity, String customization) {

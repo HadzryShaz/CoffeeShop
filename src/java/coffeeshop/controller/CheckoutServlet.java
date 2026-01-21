@@ -77,59 +77,39 @@ public class CheckoutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-//        HttpSession session = request.getSession();
-//        UserBean user = (UserBean) session.getAttribute("user");
-//        List<CartItemBean> cart = (List<CartItemBean>) session.getAttribute("cart");
-//
-//        if (user == null) {
-//            response.sendRedirect("login.jsp");
-//            return;
-//        }
-//
-//        if (cart != null && !cart.isEmpty()) {
-//            OrderBean order = new OrderBean();
-//            order.setUserId(user.getUserId()); // From USER_ID
-//            order.setOrderType(request.getParameter("orderType")); // Dine In / Take Away
-//            order.setOrderStatus("Pending");
-//
-//            // Calculate Total Price
-//            double total = 0;
-//            for (CartItemBean item : cart) {
-//                total += (item.getProduct().getProdPrice() * item.getQuantity());
-//            }
-//            order.setTotalPrice(total);
-//
-//            OrderDao dao = new OrderDao();
-//            // This method will handle both ORDERS and ORDER_ITEMS tables
-//            boolean success = dao.placeOrder(order, cart);
-//
-//            if (success) {
-//                session.removeAttribute("cart"); // Clear cart on success
-//                response.sendRedirect("MenuServlet?msg=success");
-//            } else {
-//                response.sendRedirect("cart.jsp?err=failed");
-//            }
-//        }
+        HttpSession session = request.getSession();
+        UserBean user = (UserBean) session.getAttribute("user");
+        List<CartItemBean> cart = (List<CartItemBean>) session.getAttribute("cart");
 
-// Inside CheckoutServlet.java doPost method
-HttpSession session = request.getSession();
-List<CartItemBean> cart = (List<CartItemBean>) session.getAttribute("cart");
-UserBean user = (UserBean) session.getAttribute("user");
-String orderType = request.getParameter("orderType");
+        if (user == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
 
-if (cart != null && user != null) {
-    OrderDao dao = new OrderDao();
-    // 1. Create the main Order entry first
-    int orderId = dao.createOrder(user.getUserId(), total, orderType);
-    
-    // 2. Save each item including its customization
-    for (CartItemBean item : cart) {
-        dao.saveOrderItem(orderId, item); 
-    }
-    
-    session.removeAttribute("cart");
-    response.sendRedirect("order_success.jsp");
-}
+        if (cart != null && !cart.isEmpty()) {
+            OrderBean order = new OrderBean();
+            order.setUserId(user.getUserId()); // From USER_ID
+            order.setOrderType(request.getParameter("orderType")); // Dine In / Take Away
+            order.setOrderStatus("Pending");
+
+            // Calculate Total Price
+            double total = 0;
+            for (CartItemBean item : cart) {
+                total += (item.getProduct().getProdPrice() * item.getQuantity());
+            }
+            order.setTotalPrice(total);
+
+            OrderDao dao = new OrderDao();
+            // This method will handle both ORDERS and ORDER_ITEMS tables
+            boolean success = dao.placeOrder(order, cart);
+
+            if (success) {
+                session.removeAttribute("cart"); // Clear cart on success
+                response.sendRedirect("MenuServlet?msg=success");
+            } else {
+                response.sendRedirect("cart.jsp?err=failed");
+            }
+        }
     }
 
     /**
